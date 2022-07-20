@@ -32,7 +32,7 @@ pipeline {
        
             post {
                 always{
-                    junit '**/target/surefire-reports/TEST-*.xml'
+                    --logger "trx;LogFileName=<TestResults.trx>"
                 }
             }
         }
