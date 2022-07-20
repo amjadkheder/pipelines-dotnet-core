@@ -1,7 +1,6 @@
-
 pipeline {
     agent any
-    environment{  
+    environment{  //هذي البيئه سواء سوينا اختصار او لا ماتفرق بس عشان مانجلس كل مرة نكتبها نستدعيها بالدولار  
         AWS_S3_BUCKET = "pipeline-eb"
         ARTIFACT_NAME = "hello-world.dll"
         AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
@@ -51,8 +50,8 @@ pipeline {
     
         stage('publish artfacts to s3') {
             steps {
-                sh "aws configure set region us-east-1" 
-                sh "aws s3 cp .*/bin/Debug/net6.0/.dll s3://$AWS_S3_BUCKET/$ARTIFACT_NAME"
+                sh "aws configure set region us-east-1" //عشان يعرف مكان البوكت فين 
+                sh "aws s3 cp .*/bin/Debug/net6.0/.dll s3://$AWS_S3_BUCKET/$ARTIFACT_NAME"//ينسخ ملف الوار اللي اساسا جهزناه بالميفن من السيرفر الى اس٣
             }
         }
 
