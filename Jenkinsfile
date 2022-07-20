@@ -46,7 +46,7 @@ pipeline {
         stage('publish artfacts to s3') {
             steps {
                 sh "aws configure set region us-east-1"
-                sh "aws s3 cp .*/bin/Debug/net6.0/.dll s3://$AWS_S3_BUCKET/$ARTIFACT_NAME"
+                sh "aws s3 cp ./bin/Debug/net6.0/**.dll s3://$AWS_S3_BUCKET/$ARTIFACT_NAME"
             }
         }
 
