@@ -26,15 +26,10 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh "dotnet test"
+                sh "dotnet test --logger:junit"
                 
             }
-       
-            post {
-                always{
-                    --logger "trx;LogFileName=<TestResults.trx>"
-                }
-            }
+  
         }
         stage('Package') {
             steps {
