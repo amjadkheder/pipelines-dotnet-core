@@ -1,0 +1,32 @@
+version: 0.2
+
+phases:
+  install:
+    on-failure: ABORT
+    runtime-versions:
+      java: corretto11
+  pre_build:
+    on-failure: ABORT
+    commands:
+      - echo build start on 'date'
+      - dotnet restore
+      - echo build ends on 'date'
+  build:
+    on-failure: ABORT
+    commands:
+    - echo build start on 'date'
+    - dotnet build
+    - dotnet test
+    - echo build end on 'date'
+  post_build:
+    on-failure: ABORT
+    commands:
+    - echo build start on 'date'
+    - dotnet publish
+    - mv /bin/Debug/net6.0/pipelines-dotnet-core.dll ROOT.dll
+    - echo buil end on 'date'
+
+artifacts:
+  files:
+    - ROOT.dll
+  name: dotnet-artifact
